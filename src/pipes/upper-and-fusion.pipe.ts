@@ -2,7 +2,10 @@ import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
 
 @Injectable()
 export class UpperAndFusionPipe implements PipeTransform {
-  transform(value: any, metadata: ArgumentMetadata) {
-    return value;
+  transform(entry: { data: string[] }, metadata: ArgumentMetadata) {
+    if (metadata.type === 'body') {
+      return entry.data.map((item) => item.toUpperCase()).join('-');
+    }
+    return entry;
   }
 }

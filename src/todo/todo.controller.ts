@@ -17,6 +17,7 @@ import { Todo } from './entities/todo.entity';
 import { GetPaginatedTodoDto } from './dto/get-paginated-todo.dto';
 import { AddTodoDto } from './dto/addTodoDto';
 import { TodoService } from './todo.service';
+import { UpperAndFusionPipe } from '../pipes/upper-and-fusion.pipe';
 
 @Controller('todo')
 export class TodoController {
@@ -75,5 +76,9 @@ export class TodoController {
     @Body() newTodo: Partial<AddTodoDto>,
   ) {
     return this.todoService.updateTodo(id, newTodo);
+  }
+  @Post('pipe')
+  testPipe(@Body() data, @Param('data ', UpperAndFusionPipe) parmData) {
+    return data;
   }
 }
